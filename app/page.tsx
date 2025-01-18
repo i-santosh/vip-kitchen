@@ -1,6 +1,7 @@
 import * as React from 'react';
 import HeroSection from '@/components/hero';
 import Footer from '@/components/footer';
+import Image from 'next/image';
 
 interface OfferCardProps {
   title: string;
@@ -18,10 +19,11 @@ const OfferCard: React.FC<OfferCardProps> = ({ title, description, imageUrl }) =
   <div className="group bg-stone-300 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
     <div className="aspect-square w-full relative overflow-hidden">
       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-      <img
+      <Image
         src={imageUrl}
         alt={title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        fill
+        className="transition-transform duration-500 group-hover:scale-110 object-cover"
       />
     </div>
     <div className="p-6 transform transition-transform duration-300 group-hover:translate-y-1">
@@ -34,10 +36,11 @@ const OfferCard: React.FC<OfferCardProps> = ({ title, description, imageUrl }) =
 const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description }) => (
   <div className="relative overflow-hidden rounded-lg group">
     <div className="aspect-[4/3] w-full">
-      <img
+      <Image
         src={image}
         alt={title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        fill
+        className="transition-transform duration-500 group-hover:scale-110 object-cover"
       />
     </div>
     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -88,6 +91,42 @@ const projectGallery = [
     description: "Serene and sophisticated bedroom spaces for ultimate relaxation"
   }
 ];
+
+
+
+
+const ContactSection = () => {
+  return (
+    <section className="container p-20">
+      <div className="flex">
+        <div className="w-3/5 relative">
+          <Image
+            src="https://images.livspace-cdn.com/w:1080/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/design-ideas-1631689829-DYFFs/categories-1631797090-e35Vc/desktop-1631797104-w47JI/1518-x-1288-1648187994-4ef5H.jpg"
+            alt="Interior Design"
+            className="object-cover rounded-l-lg"
+            fill
+            sizes="(max-width: 768px) 100vw, 60vw"
+            priority
+          />
+        </div>
+        <div className="w-2/5 bg-stone-400 p-8 rounded-r-lg">
+          <div className="mb-8 flex flex-col justify-center items-center h-full w-full">
+            <h2 className="text-3xl font-bold mb-4">CONTACT US</h2>
+            <p className="text-gray-600 mb-6 px-6">
+              Designing a beautiful and practical home takes valuable time and money.
+              But following trends and letting others dictate your home design choices
+              inevitably leads to disappointment and boredom.
+            </p>
+            <button className="bg-stone-600 text-white px-8 py-3 rounded-lg hover:bg-stone-700 transition-colors duration-300">
+              Book a Visit
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 
 const Home = () => {
   return (
@@ -144,31 +183,7 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className='container p-20'>
-        <div className="flex">
-          <div className="w-3/5">
-            <img
-              src="https://images.livspace-cdn.com/w:1080/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/design-ideas-1631689829-DYFFs/categories-1631797090-e35Vc/desktop-1631797104-w47JI/1518-x-1288-1648187994-4ef5H.jpg"
-              alt="Interior Design"
-              className="w-full h-[500px] object-cover rounded-l-lg"
-            />
-          </div>
-
-          <div className="w-2/5 bg-stone-400 p-8 rounded-r-lg">
-            <div className="mb-8 flex flex-col justify-center items-center h-full w-full">
-              <h2 className="text-3xl font-bold mb-4">CONTACT US</h2>
-              <p className="text-gray-600 mb-6 px-6">
-                Designing a beautiful and practical home takes valuable time and money.
-                But following trends and letting others dictate your home design choices
-                inevitably leads to disappointment and boredom.
-              </p>
-              <button className="bg-stone-600 text-white px-8 py-3 rounded-lg hover:bg-stone-700 transition-colors duration-300">
-                Book a Visit
-              </button>
-            </div>
-          </div>
-        </div>
-      </section >
+      <ContactSection />
 
       {/* Footer */}
       <Footer />
