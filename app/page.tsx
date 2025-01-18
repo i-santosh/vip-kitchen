@@ -176,7 +176,7 @@ const Home = () => {
           </div>
           <div className='w-screen flex justify-center items-center p-4'>
             <h2 className='w-[50%] text-center'>
-              Your home design can be rooted in who you are and what you value — two things that evolve over time, but never go out of style.Let's design a space that celebrate you.
+              Your home design can be rooted in who you are and what you value — two things that evolve over time, but never go out of style.Let&apos;s design a space that celebrate you.
             </h2>
           </div>
         </div>
