@@ -4,29 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from 'lucide-react';
 import clsx from "clsx";
-import { usePathname } from 'next/navigation';
 import ContactButton from "@/components/contact-button";
 import Image from "next/image";
 
 export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const getPageTitle = (path: string) => {
-    switch (path) {
-      case '/':
-        return 'Home';
-      case '/interior-designs':
-        return 'Interior Designs';
-      case '/about-us':
-        return 'About Us';
-      case '/gallery':
-        return 'Gallery';
-      case '/contact-us':
-        return 'Contact Us';
-      default:
-        return 'Home';
-    }
-  };
 
   return (
     <nav className="bg-stone-700 z-50 text-primary-foreground shadow-md h-20 sticky top-0">

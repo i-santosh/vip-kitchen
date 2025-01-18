@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from 'next/image';
 
 interface Headline {
     title: string;
@@ -141,16 +142,13 @@ const MobileCardControls: React.FC<{
 
 const HeroSection: React.FC = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-    const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
     const [currentMobileCard, setCurrentMobileCard] = useState<number>(0);
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setIsTransitioning(true);
             setTimeout(() => {
                 setCurrentImageIndex((prev) => (prev + 1) % images.length);
                 setCurrentMobileCard(0); // Reset mobile card index when image changes
-                setIsTransitioning(false);
             }, FADE_DURATION);
         }, TRANSITION_DURATION);
 
@@ -178,10 +176,14 @@ const HeroSection: React.FC = () => {
                         currentImageIndex === index ? "opacity-100" : "opacity-0"
                     )}
                 >
-                    <img
+                    <Image
                         src={src}
                         alt={`Hero image ${index + 1}`}
+                        fill
+                        priority={index === 0}
                         className="object-cover w-full h-full"
+                        sizes="100vw"
+                        quality={90}
                     />
                     <div className="absolute inset-0 bg-black/40" />
                 </div>

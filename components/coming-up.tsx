@@ -23,7 +23,7 @@ const UnderConstruction = () => {
           Page Under Construction
         </h1>
         <p className="text-lg text-stone-600 mb-8">
-          We're currently crafting something amazing for you. 
+          We&apos;re currently crafting something amazing for you. 
           This page is being written and will be available soon.
         </p>
 
