@@ -1,131 +1,142 @@
 import Link from 'next/link';
+import { FC, ReactNode } from 'react';
+import { MapPin, Phone, Instagram, Facebook, Twitter, Linkedin } from 'lucide-react';
 
-const Footer = () => {
+
+interface FooterLinkProps {
+  href: string;
+  children: ReactNode;
+  external?: boolean;
+}
+
+interface FooterSectionProps {
+  title: string;
+  children: ReactNode;
+}
+
+interface LinkItem {
+  href: string;
+  text: string;
+  icon?: ReactNode;
+}
+
+const FooterLink: FC<FooterLinkProps> = ({ href, children, external }) => (
+  <li className="group">
+    <Link
+      href={href}
+      className="relative inline-flex items-center text-gray-300 hover:text-teal-300 transition-colors duration-300"
+      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+    >
+      {children}
+      <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-teal-400 transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100"></span>
+    </Link>
+  </li>
+);
+
+const FooterSection: FC<FooterSectionProps> = ({ title, children }) => (
+  <div className="col-span-2 sm:col-span-1">
+    <h3 className="text-lg md:text-xl font-bold mb-6 text-white relative inline-block">
+      {title}
+      <span className="absolute -bottom-2 left-0 w-12 h-1 bg-teal-400 rounded-full"></span>
+    </h3>
+    {children}
+  </div>
+);
+
+const Footer: FC = () => {
+  const quickLinks: LinkItem[] = [
+    { href: '/call', text: 'Call us' },
+    { href: '/about', text: 'About us' },
+    { href: '/contact', text: 'Contact us' },
+    { href: '/whatsapp', text: 'WhatsApp' }
+  ];
+
+  const designLinks: LinkItem[] = [
+    { href: '/modular-kitchens', text: 'Modular Kitchens' },
+    { href: '/interior-work', text: 'Interior Work' },
+    { href: '/led-units', text: 'LED Units' },
+    { href: '/designs', text: 'See More' }
+  ];
+
+  const socialLinks: LinkItem[] = [
+    { href: '/instagram', text: 'Instagram', icon: <Instagram className="w-5 h-5" /> },
+    { href: '/facebook', text: 'Facebook', icon: <Facebook className="w-5 h-5" /> },
+    { href: '/twitter', text: 'Twitter', icon: <Twitter className="w-5 h-5" /> },
+    { href: '/linkedin', text: 'LinkedIn', icon: <Linkedin className="w-5 h-5" /> }
+  ];
+
   return (
-    <footer className="bg-stone-800 text-white py-8 md:py-16">
-      <div className="container mx-auto px-4 w-full">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 px-4 md:px-8 lg:px-40">
+    <footer className="bg-gradient-to-b from-stone-900 to-stone-800 text-white py-16">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-12 px-4 md:px-8 lg:px-40">
           {/* Quick Links Section */}
-          <div className="col-span-1">
-            <h3 className="text-lg md:text-xl font-semibold mb-4">Quick Links</h3>
-            <ul className="text-gray-400 space-y-2">
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/call" className="relative group inline-block">
-                  Call us
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/about" className="relative group inline-block">
-                  About us
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/contact" className="relative group inline-block">
-                  Contact us
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/whatsapp" className="relative group inline-block">
-                  WhatsApp
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
+          <FooterSection title="Quick Links">
+            <ul className="space-y-4">
+              {quickLinks.map(link => (
+                <FooterLink key={link.href} href={link.href}>
+                  {link.text}
+                </FooterLink>
+              ))}
             </ul>
-          </div>
+          </FooterSection>
 
           {/* Designs Section */}
-          <div className="col-span-1">
-            <h3 className="text-lg md:text-xl font-semibold mb-4">Designs</h3>
-            <ul className="text-gray-400 space-y-2">
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/modular-kitchens" className="relative group inline-block">
-                  Modular Kitchens
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/interior-work" className="relative group inline-block">
-                  Interior Work
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/led-units" className="relative group inline-block">
-                  LED Units
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/designs" className="relative group inline-block">
-                  See More
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
+          <FooterSection title="Designs">
+            <ul className="space-y-4">
+              {designLinks.map(link => (
+                <FooterLink key={link.href} href={link.href}>
+                  {link.text}
+                </FooterLink>
+              ))}
             </ul>
-          </div>
+          </FooterSection>
 
           {/* Address Section */}
-          <div className="col-span-2 sm:col-span-1">
-            <h3 className="text-lg md:text-xl font-semibold mb-4">Garhshankar</h3>
-            <p className="text-gray-400">
-              Chandigarh Road,<br />
-              Near Petrol Pump<br />
-              Garhshankar, Punjab-India
-            </p>
-            <ul className="pt-5 space-y-2">
-              <li className="text-gray-400 hover:text-white transition-colors duration-300">
-                <Link href="tel:+917009350717" className="relative group inline-block">
+          <FooterSection title="Garhshankar">
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3 text-gray-300">
+                <MapPin className="w-5 h-5 mt-1 text-teal-400" />
+                <p>
+                  Chandigarh Road,<br />
+                  Near Petrol Pump<br />
+                  Garhshankar, Punjab-India
+                </p>
+              </div>
+              <div className="space-y-2">
+                <FooterLink href="tel:+917009350717">
+                  <Phone className="w-4 h-4 mr-2 text-teal-400" />
                   +91 7009350717
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="text-gray-400 hover:text-white transition-colors duration-300">
-                <Link href="tel:+918968909712" className="relative group inline-block">
+                </FooterLink>
+                <FooterLink href="tel:+918968909712">
+                  <Phone className="w-4 h-4 mr-2 text-teal-400" />
                   +91 89689-09712
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-            </ul>
-          </div>
+                </FooterLink>
+              </div>
+            </div>
+          </FooterSection>
 
           {/* Social Media Section */}
-          <div className="col-span-2 sm:col-span-1">
-            <h3 className="text-lg md:text-xl font-semibold mb-4">Follow Us</h3>
-            <ul className="text-gray-400 space-y-2">
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/instagram" target="_blank" rel="noopener noreferrer" className="relative group inline-block">
-                  Instagram
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/facebook" target="_blank" rel="noopener noreferrer" className="relative group inline-block">
-                  Facebook
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/twitter" target="_blank" rel="noopener noreferrer" className="relative group inline-block">
-                  Twitter
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-              <li className="hover:text-white transition-colors duration-300">
-                <Link href="/linkedin" target="_blank" rel="noopener noreferrer" className="relative group inline-block">
-                  LinkedIn
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
+          <FooterSection title="Follow Us">
+            <ul className="space-y-4">
+              {socialLinks.map(link => (
+                <FooterLink key={link.href} href={link.href} external>
+                  <span className="flex items-center space-x-2">
+                    <span className="text-teal-400">{link.icon}</span>
+                    <span>{link.text}</span>
+                  </span>
+                </FooterLink>
+              ))}
             </ul>
-          </div>
+          </FooterSection>
         </div>
 
         {/* Copyright Section */}
-        <div className="border-t border-gray-800 mt-8 md:mt-12 pt-8 text-center text-gray-400">
-          <p className="text-sm md:text-base">&copy; 2025 VIP Kitchen & Interiors. All rights reserved.</p>
+        <div className="border-t border-stone-700/50 mt-12 pt-8">
+          <div className="text-center">
+            <p className="text-sm md:text-base text-gray-400">
+              &copy; 2025 VIP Kitchen & Interiors. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

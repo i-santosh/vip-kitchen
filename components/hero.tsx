@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Image from 'next/image';
 
 interface Headline {
@@ -12,8 +12,8 @@ interface Headline {
 }
 
 const images: string[] = [
-    "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/in/livspace-vesta-1615288282-wkMjI/banner-1615288298-M39ju/updated-1632133477-mccfx/vesta-banner-trusted-desktop-1632133728-Z3ZWu.jpg",
-    "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/in/homepage/v2-1675654701-1kKSt/desktop-1675655000-6H0mD/banner-1675655465-eXung/kitchen-homepage-banner-web-1689683306-uyQOf.jpg",
+    "/hero-img-1.jpg",
+    "/hero-img-2.jpg",
     "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/in/homepage/banner-1714034487-xNaST/homepage-banner-web-1714034622-yivWL.jpg",
 ];
 
@@ -32,22 +32,31 @@ const headlines: Headline[] = [
     }
 ];
 
-const keyNotes = [
-    [
-        "Thoughtful spaces that reflect you",
-        "Luxury homes starting at Rs.1800/sqft",
-        "Designs that celebrate your personality"
-    ],
-    [
-        "Modern kitchens with latest designs",
-        "Professional designers for bespoke looks",
-        "Transforming homes with creative designs"
-    ],
-    [
-        "Elevating bedrooms to serene retreats",
-        "Luxury interiors that make you feel at home",
-        "Designing spaces that empower your lifestyle"
-    ]
+const steps = [
+    {
+        title: "Discover",
+        notes: [
+            "Thoughtful spaces that reflect you",
+            "Modern kitchens with latest designs",
+            "Elevating bedrooms to serene retreats"
+        ]
+    },
+    {
+        title: "Design",
+        notes: [
+            "Luxury homes starting at Rs.1800/sqft",
+            "Professional designers for bespoke looks",
+            "Luxury interiors that make you feel at home"
+        ]
+    },
+    {
+        title: "Deliver",
+        notes: [
+            "Designs that celebrate your personality",
+            "Transforming homes with creative designs",
+            "Designing spaces that empower your lifestyle"
+        ]
+    }
 ];
 
 const TRANSITION_DURATION = 6000;
@@ -56,7 +65,9 @@ const FADE_DURATION = 1000;
 const CustomProgressBar: React.FC<{
     isActive: boolean;
     isComplete: boolean;
-}> = ({ isActive, isComplete }) => {
+    duration: number;
+    onComplete?: () => void;
+}> = ({ isActive, isComplete, duration, onComplete }) => {
     const [width, setWidth] = useState<number>(0);
 
     useEffect(() => {
@@ -68,21 +79,20 @@ const CustomProgressBar: React.FC<{
             const progress = timestamp - startTime;
 
             if (isActive) {
-                const newWidth = Math.min((progress / TRANSITION_DURATION) * 100, 100);
+                const newWidth = Math.min((progress / duration) * 100, 100);
                 setWidth(newWidth);
 
-                if (progress < TRANSITION_DURATION) {
+                if (progress < duration) {
                     animationFrame = requestAnimationFrame(animate);
+                } else if (onComplete) {
+                    onComplete();
                 }
-            } else if (isComplete) {
-                setWidth(100);
-            } else {
-                setWidth(0);
             }
         };
 
         if (isActive) {
             startTime = null;
+            setWidth(0);
             animationFrame = requestAnimationFrame(animate);
         } else {
             setWidth(isComplete ? 100 : 0);
@@ -93,80 +103,72 @@ const CustomProgressBar: React.FC<{
                 cancelAnimationFrame(animationFrame);
             }
         };
-    }, [isActive, isComplete]);
+    }, [isActive, isComplete, duration, onComplete]);
 
     return (
-        <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden">
-            <div
-                className="h-full bg-stone-800 transition-all duration-300 rounded-full"
-                style={{ width: `${width}%` }}
-            />
+        <div className="relative w-full h-1 bg-white/10">
+            <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-teal-500 to-teal-400 transition-all duration-300"
+                style={{ width: `${width}%` }}>
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-teal-400 rotate-45" />
+            </div>
         </div>
     );
 };
 
-const MobileCardControls: React.FC<{
-    currentCard: number;
-    totalCards: number;
-    onPrevious: () => void;
-    onNext: () => void;
-}> = ({ currentCard, totalCards, onPrevious, onNext }) => (
-    <div className="flex items-center justify-between mt-4 md:hidden">
-        <button
-            onClick={onPrevious}
-            className="p-2 text-white/70 hover:text-white disabled:opacity-50"
-            disabled={currentCard === 0}
-        >
-            <ChevronLeft className="w-6 h-6" />
-        </button>
-        <div className="flex gap-2">
-            {Array.from({ length: totalCards }).map((_, i) => (
-                <div
-                    key={i}
-                    className={cn(
-                        "w-2 h-2 rounded-full",
-                        currentCard === i ? "bg-white" : "bg-white/30"
-                    )}
-                />
-            ))}
+const StepCard: React.FC<{
+    index: number;
+    title: string;
+    note: string;
+    isActive: boolean;
+    isComplete: boolean;
+    duration: number;
+    onComplete?: () => void;
+}> = ({ index, title, note, isActive, isComplete, duration, onComplete }) => (
+    <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:border-teal-500/30 transition-all duration-300 overflow-hidden group">
+        <div className="p-4">
+            <div className="flex items-center space-x-3 mb-3">
+                <div className={cn(
+                    "w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium transition-colors duration-300",
+                    isComplete ? "bg-teal-500 text-white" : "bg-white/10 text-white/70"
+                )}>
+                    {index + 1}
+                </div>
+                <h3 className="text-white/90 font-medium">{title}</h3>
+            </div>
+            <CustomProgressBar
+                isActive={isActive}
+                isComplete={isComplete}
+                duration={duration}
+                onComplete={onComplete}
+            />
+            <p className="mt-3 text-white/60 text-sm line-clamp-2 group-hover:text-white/80 transition-colors duration-300">
+                {note}
+            </p>
         </div>
-        <button
-            onClick={onNext}
-            className="p-2 text-white/70 hover:text-white disabled:opacity-50"
-            disabled={currentCard === totalCards - 1}
-        >
-            <ChevronRight className="w-6 h-6" />
-        </button>
-    </div>
+    </Card>
 );
 
 const HeroSection: React.FC = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-    const [currentMobileCard, setCurrentMobileCard] = useState<number>(0);
+
+    const moveToNextImage = useCallback(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, []);
 
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeout(() => {
-                setCurrentImageIndex((prev) => (prev + 1) % images.length);
-                setCurrentMobileCard(0); // Reset mobile card index when image changes
+                moveToNextImage();
             }, FADE_DURATION);
         }, TRANSITION_DURATION);
 
         return () => {
             clearInterval(timer);
         };
-    }, []);
-
-    const handlePreviousCard = () => {
-        setCurrentMobileCard((prev) => Math.max(0, prev - 1));
-    };
-
-    const handleNextCard = () => {
-        setCurrentMobileCard((prev) => Math.min(2, prev + 1));
-    };
+    }, [moveToNextImage]);
 
     return (
-        <div className="relative w-full h-screen overflow-hidden">
+        <div className="relative w-full min-h-screen overflow-hidden z-10">
             {/* Image Container */}
             {images.map((src, index) => (
                 <div
@@ -185,79 +187,50 @@ const HeroSection: React.FC = () => {
                         sizes="100vw"
                         quality={90}
                     />
-                    <div className="absolute inset-0 bg-black/40" />
+                    {/* Enhanced gradient overlay with stronger mobile visibility */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80 md:from-black/70 md:via-black/50 md:to-black/70" />
                 </div>
             ))}
 
             {/* Content Container */}
-            <div className="absolute inset-0 flex flex-col justify-between py-16">
-                <div className="container mx-auto px-6">
-                    <div className="max-w-xl">
-                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
+            <div className="absolute inset-0 flex flex-col">
+                {/* Main Content */}
+                <div className="flex-1 flex flex-col justify-center items-center px-4 md:px-6 container mx-auto">
+                    <div className="max-w-xl md:max-w-2xl relative text-center">
+                        <div className="w-16 md:w-20 h-1 bg-gradient-to-r from-teal-500 to-teal-400 mb-6 md:mb-8 mx-auto" />
+                        {/* Responsive typography */}
+                        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 animate-fade-in drop-shadow-lg leading-tight">
                             {headlines[currentImageIndex].title}
                         </h1>
-                        <p className="text-xl text-white/90 mb-8 animate-fade-in-delay">
-                            {headlines[currentImageIndex].subtitle}
-                        </p>
-                        <button
-                            className="bg-white text-stone-500 px-8 py-3 rounded-lg hover:bg-white/90 transition-colors w-fit"
-                            onClick={() => console.log('Begin journey clicked')}
-                        >
-                            Begin Journey
+                        {/* Enhanced mobile subtitle */}
+                        <div className="backdrop-blur-sm bg-black/40 md:bg-black/30 rounded-lg p-3 md:p-4 mb-6 md:mb-8">
+                            <p className="text-lg md:text-xl text-white/90 animate-fade-in-delay leading-relaxed">
+                                {headlines[currentImageIndex].subtitle}
+                            </p>
+                        </div>
+                        <button className="group bg-gradient-to-r from-teal-600 to-teal-400 text-white px-6 md:px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-300 inline-flex items-center space-x-2">
+                            <span className="font-medium">Begin Journey</span>
+                            <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                         </button>
                     </div>
                 </div>
 
-                {/* Progress Cards Container */}
-                <div className="container mx-auto px-6">
-                    {/* Mobile View - Single Card */}
-                    <div className="block md:hidden">
-                        <Card className="bg-white/10 backdrop-blur-md hover:border-stone-800 border-white/20">
-                            <CardHeader>
-                                <CardTitle className="text-white/90 text-lg">
-                                    Step {currentMobileCard + 1}: {currentMobileCard === 0 ? "Discover" : currentMobileCard === 1 ? "Design" : "Deliver"}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <CustomProgressBar
-                                    isActive={currentImageIndex === currentMobileCard}
-                                    isComplete={currentImageIndex > currentMobileCard}
-                                />
-                                <p className="mt-4 text-white/70 text-sm">
-                                    {keyNotes[currentImageIndex][currentMobileCard]}
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <MobileCardControls
-                            currentCard={currentMobileCard}
-                            totalCards={3}
-                            onPrevious={handlePreviousCard}
-                            onNext={handleNextCard}
-                        />
-                    </div>
-
-                    {/* Desktop View - Grid */}
-                    <div className="hidden md:grid grid-cols-3 gap-4">
-                        {[0, 1, 2].map((index) => (
-                            <Card key={index} className="bg-white/10 hover:bg-stone-600/10 backdrop-blur-md hover:border-stone-800 border-white/20">
-                                <CardHeader>
-                                    <CardTitle className="text-white/90 text-lg">
-                                        Step {index + 1}: {index === 0 ? "Discover" : index === 1 ? "Design" : "Deliver"}
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <CustomProgressBar
-                                        isActive={currentImageIndex === index}
-                                        isComplete={currentImageIndex > index}
-                                    />
-                                    <p className="mt-4 text-white/70 text-sm">
-                                        {keyNotes[currentImageIndex][index]}
-                                    </p>
-                                </CardContent>
-                            </Card>
+                {/* Steps Cards - Hidden on mobile */}
+                <div className="hidden md:block container mx-auto px-6 pb-16">
+                    <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
+                        {steps.map((step, index) => (
+                            <StepCard
+                                key={index}
+                                index={index}
+                                title={step.title}
+                                note={step.notes[currentImageIndex]}
+                                isActive={currentImageIndex === index}
+                                isComplete={currentImageIndex > index}
+                                duration={TRANSITION_DURATION}
+                                onComplete={index === 2 ? moveToNextImage : undefined}
+                            />
                         ))}
                     </div>
-
                 </div>
             </div>
         </div>
