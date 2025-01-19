@@ -3,6 +3,14 @@ import { ArrowUpRight, ChevronRight, Sparkles, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Card, CardContent } from "@/components/ui/card";
 import ProductCard from '@/components/interior/products';
+import type { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+    title: "Interior Design Portfolio | VIP Kitchen",
+    description: "Discover our collection of thoughtfully crafted spaces that reflect modern living.",
+};
+
 
 interface DesignShowcaseProps {
     isImageFirst?: boolean;

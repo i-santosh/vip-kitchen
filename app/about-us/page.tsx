@@ -2,6 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Users, Heart, Star, Clock, CheckCircle2, Building2 } from 'lucide-react';
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "About Us | VIP Kitchen",
+  description: "Crafting Beautiful Spaces Since 2008.",
+};
+
 
 interface StatCardProps {
   icon: React.ElementType;
