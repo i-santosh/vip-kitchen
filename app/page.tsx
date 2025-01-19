@@ -78,38 +78,38 @@ const offerCards = [
   {
     title: 'Interior Design',
     description: 'Expert designers to help you create your dream space with personalized solutions.',
-    imageUrl: 'https://vipkitchen.in/wp-content/uploads/2022/07/6-1.jpg'
+    imageUrl: '/6-1.jpg'
   },
   {
     title: 'Furniture Solutions',
     description: 'Curated collection of premium furniture from leading brands worldwide.',
-    imageUrl: 'https://vipkitchen.in/wp-content/uploads/2022/07/4.jpg'
+    imageUrl: '/4.jpg'
   },
   {
     title: 'Project Management',
     description: 'End-to-end project execution with dedicated project managers.',
-    imageUrl: 'https://vipkitchen.in/wp-content/uploads/2022/07/home_interior3_portfolio2-960x720-1.jpg'
+    imageUrl: '/home_interior3_portfolio2-960x720-1.jpg'
   },
   {
     title: 'Quality Assurance',
     description: 'Rigorous quality checks and warranty on all products and services.',
-    imageUrl: 'https://vipkitchen.in/wp-content/uploads/2022/07/home_interior3_portfolio4-960x720-1.jpg'
+    imageUrl: '/home_interior3_portfolio4-960x720-1.jpg'
   }
 ];
 
 const projectGallery = [
   {
-    image: "https://images.livspace-cdn.com/w:3840/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/2024-1704354150-jzIcs/ond-1728544865-qCz8v/living-room-1728552712-ToumU/021325jnjnjn-1733306135-GQ8UW.jpg",
+    image: "/021325jnjnjn-1733306135-GQ8UW.jpg",
     title: "Modern Living Room",
     description: "Contemporary design with comfort and style in perfect harmony"
   },
   {
-    image: "https://images.livspace-cdn.com/w:3840/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/2024-1704354150-jzIcs/ond-1728544865-qCz8v/kitchen-1728544882-0n1Ia/0025-1734075898-kVHBp.jpg",
+    image: "/0025-1734075898-kVHBp.jpg",
     title: "Luxury Kitchen",
     description: "State-of-the-art kitchen design with premium finishes"
   },
   {
-    image: "https://vipkitchen.in/wp-content/uploads/2022/07/Bedroom.jpg",
+    image: "/vipk-Bedroom.jpg",
     title: "Master Bedroom",
     description: "Serene and sophisticated bedroom spaces for ultimate relaxation"
   }
@@ -122,7 +122,7 @@ const ContactSection = () => {
       <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-2xl">
         <div className="w-full md:w-3/5 relative h-[400px]">
           <Image
-            src="https://images.livspace-cdn.com/w:1080/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/design-ideas-1631689829-DYFFs/categories-1631797090-e35Vc/desktop-1631797104-w47JI/1518-x-1288-1648187994-4ef5H.jpg"
+            src="/contact.jpg"
             alt="Interior Design"
             className="object-cover"
             fill

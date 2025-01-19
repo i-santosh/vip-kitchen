@@ -215,7 +215,7 @@ const InteriorDesigns: React.FC = () => {
             {/* Hero Section */}
             <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
                 <Image
-                    src="https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/in/homepage/banner-1714034487-xNaST/homepage-banner-web-1714034622-yivWL.jpg"
+                    src="/yivWL.jpg"
                     alt="Interior Design Banner"
                     fill
                     className="object-cover"

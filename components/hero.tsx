@@ -14,7 +14,7 @@ interface Headline {
 const images: string[] = [
     "/hero-img-1.jpg",
     "/hero-img-2.jpg",
-    "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/in/homepage/banner-1714034487-xNaST/homepage-banner-web-1714034622-yivWL.jpg",
+    "/yivWL.jpg",
 ];
 
 const headlines: Headline[] = [
