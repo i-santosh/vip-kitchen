@@ -1,9 +1,10 @@
 import React from 'react';
-import { ArrowUpRight, ChevronRight, Sparkles, ArrowRight } from 'lucide-react';
+import { ChevronRight, Sparkles, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Card, CardContent } from "@/components/ui/card";
 import ProductCard from '@/components/interior/products';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 
 export const metadata: Metadata = {
@@ -69,10 +70,6 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ title, description, image }
         <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
             <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
             <p className="text-white/80 text-sm mb-4">{description}</p>
-            <button className="flex items-center space-x-2 text-teal-400 group/btn">
-                <span>Explore More</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:translate-y-[-4px]" />
-            </button>
         </div>
     </div>
 );
@@ -162,28 +159,24 @@ const InteriorDesigns: React.FC = () => {
         {
             image: "/product-1.jpg",
             name: "Modern Lounge Chair",
-            price: 5632,
             rating: 4.8,
             category: "Seating"
         },
         {
             image: "/product-2.jpg",
             name: "Pendant Light",
-            price: 7898,
             rating: 4.7,
             category: "Lighting"
         },
         {
             image: "/product-3.jpg",
             name: "Marble Coffee Table",
-            price: 3270,
             rating: 4.9,
             category: "Tables"
         },
         {
             image: "/product-4.jpg",
             name: "Accent Cabinet",
-            price: 7580,
             rating: 4.6,
             category: "Storage"
         }
@@ -286,7 +279,6 @@ const InteriorDesigns: React.FC = () => {
                                 key={index}
                                 image={product.image}
                                 name={product.name}
-                                price={product.price}
                                 rating={product.rating}
                                 category={product.category}
                             />
@@ -340,10 +332,10 @@ const InteriorDesigns: React.FC = () => {
                         <p className="mb-8 text-white/80">
                             Let&apos;s collaborate to create a space that perfectly reflects your style and meets your needs.
                         </p>
-                        <button className="inline-flex items-center space-x-2 bg-white text-teal-900 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors duration-300 group">
+                        <Link href='/contact-us' className="inline-flex items-center space-x-2 bg-white text-teal-900 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors duration-300 group">
                             <span>Schedule a Consultation</span>
                             <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>

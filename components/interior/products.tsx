@@ -13,12 +13,11 @@ import {
 interface ProductCardProps {
   image: string;
   name: string;
-  price: number;
   rating: number;
   category: string;
 }
 
-const ProductCard = ({ image, name, price, rating, category }: ProductCardProps) => {
+const ProductCard = ({ image, name, rating, category }: ProductCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -42,7 +41,7 @@ const ProductCard = ({ image, name, price, rating, category }: ProductCardProps)
         <div className="mt-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-gray-900">{name}</h3>
-            <p className="text-sm font-medium text-gray-900">${price}</p>
+            {/* <p className="text-sm font-medium text-gray-900">${price}</p> */}
           </div>
           <div className="mt-2 flex items-center justify-between">
             <p className="text-sm text-gray-500">{category}</p>
@@ -75,7 +74,6 @@ const ProductCard = ({ image, name, price, rating, category }: ProductCardProps)
           </div>
           <div className="p-4">
             <div className="flex items-center justify-between">
-              <p className="text-lg font-medium">${price}</p>
               <div className="flex items-center">
                 <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
                 <span className="ml-1 text-gray-500">{rating}</span>

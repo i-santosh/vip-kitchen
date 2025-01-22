@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Users, Heart, Star, Clock, CheckCircle2, Building2 } from 'lucide-react';
 import type { Metadata } from "next";
+import Link from 'next/link';
 
 
 export const metadata: Metadata = {
@@ -235,9 +236,9 @@ const AboutUs: React.FC = () => {
           <p className="text-white/80 max-w-xl mx-auto mb-8">
             Let&apos;s work together to create a space that reflects your style and exceeds your expectations.
           </p>
-          <button className="bg-white text-teal-900 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors duration-300">
+          <Link href='/contact-us' className="bg-white text-teal-900 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors duration-300">
             Schedule a Consultation
-          </button>
+          </Link>
         </div>
       </section>
     </div>

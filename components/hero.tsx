@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Headline {
     title: string;
@@ -59,8 +60,8 @@ const steps = [
     }
 ];
 
-const TRANSITION_DURATION = 6000;
-const FADE_DURATION = 1000;
+const TRANSITION_DURATION = 3000;
+const FADE_DURATION = 100;
 
 const CustomProgressBar: React.FC<{
     isActive: boolean;
@@ -208,10 +209,10 @@ const HeroSection: React.FC = () => {
                                 {headlines[currentImageIndex].subtitle}
                             </p>
                         </div>
-                        <button className="group bg-gradient-to-r from-teal-600 to-teal-400 text-white px-6 md:px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-300 inline-flex items-center space-x-2">
+                        <Link href='/contact-us' className="group bg-gradient-to-r from-teal-600 to-teal-400 text-white px-6 md:px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-300 inline-flex items-center space-x-2">
                             <span className="font-medium">Begin Journey</span>
                             <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

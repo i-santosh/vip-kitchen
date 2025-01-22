@@ -1,7 +1,10 @@
-import React from 'react';
+"use client"
+
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, MapPin, Clock, ArrowRight, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 type ContactDetail = {
     text: string;
@@ -16,6 +19,66 @@ type ContactInfo = {
 }
 
 const ContactPage = () => {
+    const [formData, setFormData] = useState({
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone_number: '',
+        message: ''
+    });
+
+    const [status, setStatus] = useState({
+        type: '', // 'success' | 'error'
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setStatus({ type: '', message: '' });
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/contact/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to submit form');
+            }
+            setStatus({
+                type: 'success',
+                message: 'Thank you for your message! We will get back to you soon.'
+            });
+            setFormData({
+                first_name: '',
+                last_name: '',
+                email: '',
+                phone_number: '',
+                message: ''
+            });
+        } catch (error: any) {
+            setStatus({
+                type: 'error',
+                message: error.message || 'Something went wrong. Please try again.'
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     const contactInfo: ContactInfo[] = [
         {
             icon: Phone,
@@ -68,6 +131,9 @@ const ContactPage = () => {
             mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3421.6189194132744!2d76.5193369754938!3d30.953206074478643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39055516b41791c9%3A0xa4623ad21d2257d!2sVIP%20Kitchen%20%26%20Interiors!5e0!3m2!1sen!2sin!4v1737289659929!5m2!1sen!2sin"
         }
     ];
+
+
+
 
     return (
         <div className="min-h-screen bg-white">
@@ -148,7 +214,12 @@ const ContactPage = () => {
 
                         <Card className="border-none shadow-lg">
                             <CardContent className="p-8">
-                                <form className="space-y-6">
+                                {status.type && (
+                                    <Alert className={`mb-6 ${status.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                                        <AlertDescription>{status.message}</AlertDescription>
+                                    </Alert>
+                                )}
+                                <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -156,8 +227,12 @@ const ContactPage = () => {
                                             </label>
                                             <input
                                                 type="text"
+                                                name="first_name"
+                                                value={formData.first_name}
+                                                onChange={handleChange}
                                                 className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                                 placeholder="Enter your first name"
+                                                required
                                             />
                                         </div>
                                         <div>
@@ -166,8 +241,12 @@ const ContactPage = () => {
                                             </label>
                                             <input
                                                 type="text"
+                                                name="last_name"
+                                                value={formData.last_name}
+                                                onChange={handleChange}
                                                 className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                                 placeholder="Enter your last name"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -177,8 +256,12 @@ const ContactPage = () => {
                                         </label>
                                         <input
                                             type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                             placeholder="Enter your email"
+                                            required
                                         />
                                     </div>
                                     <div>
@@ -187,8 +270,12 @@ const ContactPage = () => {
                                         </label>
                                         <input
                                             type="tel"
+                                            name="phone_number"
+                                            value={formData.phone_number}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                             placeholder="Enter your phone number"
+                                            required
                                         />
                                     </div>
                                     <div>
@@ -196,18 +283,27 @@ const ContactPage = () => {
                                             Message
                                         </label>
                                         <textarea
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
                                             rows={4}
                                             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                             placeholder="Tell us about your project"
+                                            required
                                         />
                                     </div>
-                                    <button className="w-full bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition-colors duration-300 flex items-center justify-center space-x-2 group">
-                                        <span>Send Message</span>
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="w-full bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition-colors duration-300 flex items-center justify-center space-x-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                                         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                                     </button>
                                 </form>
                             </CardContent>
                         </Card>
+
                     </div>
                 </div>
             </section>

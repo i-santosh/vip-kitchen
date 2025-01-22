@@ -97,7 +97,7 @@ const Footer: FC = () => {
               <div className="flex items-start space-x-3 text-gray-300">
                 <MapPin className="w-5 h-5 mt-1 text-teal-400" />
                 <p>
-                  Chandigarh Road,<br />
+                  Nawanshahr Road,<br />
                   Near Petrol Pump<br />
                   Garhshankar, Punjab-India
                 </p>
@@ -134,7 +134,7 @@ const Footer: FC = () => {
         <div className="border-t border-stone-700/50 mt-12 pt-8">
           <div className="text-center">
             <p className="text-sm md:text-base text-gray-400">
-              &copy; 2025 VIP Kitchen & Interiors. All rights reserved.
+              &copy; 2008 - {new Date().getFullYear()} VIP Kitchen & Interiors. All rights reserved.
             </p>
           </div>
         </div>

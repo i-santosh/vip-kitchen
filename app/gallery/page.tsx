@@ -1,9 +1,10 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Filter, Sparkles } from 'lucide-react';
+import { Filter, Play, Sparkles } from 'lucide-react';
 import Image from 'next/image';
-import VideoPlayer from '@/components/video-player';
+import Link from 'next/link';
+
 
 interface Category {
     id: string;
@@ -26,8 +27,18 @@ interface VideoProject {
     thumbnail?: string;
 }
 
+interface VideoPlayerProps {
+    videoId: string;
+    title: string;
+    thumbnail?: string;
+    isPlaying: boolean;
+    onPlay: () => void;
+}
+
+
 const GalleryPage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
+    const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
 
     const categories: Category[] = [
         { id: 'all', label: 'All Projects' },
@@ -218,6 +229,10 @@ const GalleryPage: React.FC = () => {
         }
     ];
 
+    const handleVideoPlay = (videoId: string) => {
+        setActiveVideoId(videoId);
+    };
+
     const filteredItems = selectedCategory === 'all'
         ? galleryItems
         : galleryItems.filter(item => item.category === selectedCategory);
@@ -307,6 +322,8 @@ const GalleryPage: React.FC = () => {
                                     videoId={video.videoId}
                                     title={video.title}
                                     thumbnail={video.thumbnail}
+                                    isPlaying={activeVideoId === video.videoId}
+                                    onPlay={() => handleVideoPlay(video.videoId)}
                                 />
                                 <div className="mt-4">
                                     <h3 className="text-xl font-semibold text-gray-900 mb-2">{video.title}</h3>
@@ -330,13 +347,58 @@ const GalleryPage: React.FC = () => {
                     <p className="text-white/80 max-w-xl mx-auto mb-8">
                         Let&apos;s collaborate to create a space that perfectly reflects your style and meets your needs.
                     </p>
-                    <button className="bg-white text-teal-900 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors duration-300">
+                    <Link href='/contact-us' className="bg-white text-teal-900 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors duration-300">
                         Schedule a Consultation
-                    </button>
+                    </Link>
                 </div>
             </section>
         </div>
     );
 };
+
+
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, title, thumbnail, isPlaying, onPlay }) => {
+    const thumbnailUrl = thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+    return (
+        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-900">
+            {!isPlaying ? (
+                <>
+                    <div className="relative w-full h-full">
+                        <Image
+                            src={thumbnailUrl}
+                            alt={title}
+                            fill
+                            className="object-cover transition-transform duration-300 hover:scale-105"
+                            priority
+                        />
+                    </div>
+                    <div className="absolute inset-0 bg-black/30 transition-opacity hover:bg-black/40" />
+                    <button
+                        onClick={onPlay}
+                        className="absolute inset-0 flex items-center justify-center group"
+                        aria-label="Play video"
+                    >
+                        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white/90 group-hover:bg-white transition-all duration-300 group-hover:scale-110">
+                            <Play
+                                className="w-8 h-8 text-teal-600 group-hover:text-teal-700 transition-colors ml-1"
+                                fill="currentColor"
+                            />
+                        </div>
+                    </button>
+                </>
+            ) : (
+                <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`}
+                    title={title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                />
+            )}
+        </div>
+    );
+};
+
 
 export default GalleryPage;

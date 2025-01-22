@@ -2,6 +2,7 @@ import * as React from 'react';
 import HeroSection from '@/components/hero';
 import Image from 'next/image';
 import { ArrowUpRight, ChevronRight, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 
 interface OfferCardProps {
   title: string;
@@ -142,10 +143,10 @@ const ContactSection = () => {
               Book a consultation today and take the first step towards your
               perfect home.
             </p>
-            <button className="flex items-center space-x-2 bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition-colors duration-300 w-fit group">
+            <Link href='/contact-us' className="flex items-center space-x-2 bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition-colors duration-300 w-fit group">
               <span>Book a Visit</span>
               <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
