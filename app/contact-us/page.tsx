@@ -69,11 +69,18 @@ const ContactPage = () => {
                 phone_number: '',
                 message: ''
             });
-        } catch (error: any) {
-            setStatus({
-                type: 'error',
-                message: error.message || 'Something went wrong. Please try again.'
-            });
+        } catch (error: unknown ) {
+            if (error instanceof Error) {
+                setStatus({
+                    type: 'error',
+                    message: error.message || 'Something went wrong. Please try again.'
+                });
+            } else {
+                setStatus({
+                    type: 'error',
+                    message: 'Something went wrong. Please try again.'
+                });
+            }
         } finally {
             setIsSubmitting(false);
         }
