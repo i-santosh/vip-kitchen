@@ -103,7 +103,7 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ title, description, ima
 const InteriorDesigns: React.FC = () => {
     const designs = [
         {
-            image: "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/2024-1704354150-jzIcs/ond-1728544865-qCz8v/living-room-1728552712-ToumU/021325jnjnjn-1733306135-GQ8UW.jpg",
+            image: "/021325jnjnjn-1733306135-GQ8UW.jpg",
             title: "Contemporary Living Spaces",
             description: "Modern design elements seamlessly blend with comfort to create an inviting atmosphere that suits your lifestyle.",
             features: [
@@ -114,7 +114,7 @@ const InteriorDesigns: React.FC = () => {
             ]
         },
         {
-            image: "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/2024-1704354150-jzIcs/ond-1728544865-qCz8v/kitchen-1728544882-0n1Ia/0025-1734075898-kVHBp.jpg",
+            image: "/0025-1734075898-kVHBp.jpg",
             title: "Modern Kitchen Designs",
             description: "Functional and stylish kitchens that combine innovative storage solutions with premium aesthetics.",
             features: [
@@ -125,7 +125,7 @@ const InteriorDesigns: React.FC = () => {
             ]
         },
         {
-            image: "https://vipkitchen.in/wp-content/uploads/2022/07/Bedroom.jpg",
+            image: "/vipk-Bedroom.jpg",
             title: "Luxurious Bedrooms",
             description: "Transform your bedroom into a peaceful sanctuary with our carefully curated design elements.",
             features: [

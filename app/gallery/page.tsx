@@ -211,21 +211,21 @@ const GalleryPage: React.FC = () => {
             videoId: "f4X2cOnWQ3g",
             title: "Modern House Tour",
             description: "Walk through our latest modern home transformation",
-            thumbnail: "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/2024-1704354150-jzIcs/ond-1728544865-qCz8v/living-room-1728552712-ToumU/021325jnjnjn-1733306135-GQ8UW.jpg"
+            thumbnail: "/021325jnjnjn-1733306135-GQ8UW.jpg"
         },
         {
             id: 2,
             videoId: "f_jUaaM7lFM",
             title: "Kitchen Renovation",
             description: "Complete kitchen makeover from start to finish",
-            thumbnail: "https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/2024-1704354150-jzIcs/ond-1728544865-qCz8v/kitchen-1728544882-0n1Ia/0025-1734075898-kVHBp.jpg"
+            thumbnail: "/kVHBp.jpg"
         },
         {
             id: 3,
             videoId: "iaxpvJIaXOg",
             title: "Bedroom Design Tips",
             description: "Expert tips for creating the perfect bedroom",
-            thumbnail: "https://vipkitchen.in/wp-content/uploads/2022/07/Bedroom.jpg"
+            thumbnail: "/vipk-Bedroom.jpg"
         }
     ];
 
@@ -242,7 +242,7 @@ const GalleryPage: React.FC = () => {
             {/* Hero Section */}
             <section className="relative h-[60vh] flex items-center justify-center">
                 <Image
-                    src="https://images.livspace-cdn.com/w:1920/plain/https://d3gq2merok8n5r.cloudfront.net/bumblebee/in/homepage/banner-1714034487-xNaST/homepage-banner-web-1714034622-yivWL.jpg"
+                    src="/yivWL.jpg"
                     alt="Gallery Banner"
                     fill
                     className="object-cover"

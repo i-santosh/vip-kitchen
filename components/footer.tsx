@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
-import { MapPin, Phone, Instagram, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { MapPin, Phone, Instagram, Facebook, MessageSquare } from 'lucide-react';
 
 
 interface FooterLinkProps {
@@ -45,24 +45,23 @@ const FooterSection: FC<FooterSectionProps> = ({ title, children }) => (
 
 const Footer: FC = () => {
   const quickLinks: LinkItem[] = [
-    { href: '/call', text: 'Call us' },
-    { href: '/about', text: 'About us' },
-    { href: '/contact', text: 'Contact us' },
-    { href: '/whatsapp', text: 'WhatsApp' }
+    { href: 'tel:917009350717', text: 'Call us' },
+    { href: '/about-us', text: 'About us' },
+    { href: '/contact-us', text: 'Contact us' },
+    { href: 'https://wa.me/917009350717', text: 'WhatsApp' }
   ];
 
   const designLinks: LinkItem[] = [
-    { href: '/modular-kitchens', text: 'Modular Kitchens' },
-    { href: '/interior-work', text: 'Interior Work' },
-    { href: '/led-units', text: 'LED Units' },
-    { href: '/designs', text: 'See More' }
+    { href: '/interior-designs', text: 'Modular Kitchens' },
+    { href: '/interior-designs', text: 'Interior Work' },
+    { href: '/interior-designs', text: 'LED Units' },
+    { href: '/interior-designs', text: 'See More' }
   ];
 
   const socialLinks: LinkItem[] = [
-    { href: '/instagram', text: 'Instagram', icon: <Instagram className="w-5 h-5" /> },
-    { href: '/facebook', text: 'Facebook', icon: <Facebook className="w-5 h-5" /> },
-    { href: '/twitter', text: 'Twitter', icon: <Twitter className="w-5 h-5" /> },
-    { href: '/linkedin', text: 'LinkedIn', icon: <Linkedin className="w-5 h-5" /> }
+    { href: 'https://www.instagram.com/vipkitchen65/', text: 'Instagram', icon: <Instagram className="w-5 h-5" /> },
+    { href: 'https://www.facebook.com/people/VIP-Kitchen/100082641335949/', text: 'Facebook', icon: <Facebook className="w-5 h-5" /> },
+    { href: 'https://wa.me/917009350717', text: 'WhatsApp', icon: <MessageSquare className="w-5 h-5" /> },
   ];
 
   return (
