@@ -102,13 +102,9 @@ const Footer: FC = () => {
                 </p>
               </div>
               <div className="space-y-2">
-                <FooterLink href="tel:+917009350717">
+                <FooterLink href="tel:+7009350717">
                   <Phone className="w-4 h-4 mr-2 text-teal-400" />
-                  +91 7009350717
-                </FooterLink>
-                <FooterLink href="tel:+918968909712">
-                  <Phone className="w-4 h-4 mr-2 text-teal-400" />
-                  +91 89689-09712
+                  +91 70093-50717 
                 </FooterLink>
               </div>
             </div>

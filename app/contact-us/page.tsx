@@ -46,7 +46,7 @@ const ContactPage = () => {
         setStatus({ type: '', message: '' });
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/contact/', {
+            const response = await fetch('https://vipkitchen.pythonanywhere.com/api/contact/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,8 +91,7 @@ const ContactPage = () => {
             icon: Phone,
             title: "Call Us",
             details: [
-                { text: "+91 98765 43210" },
-                { text: "+91 98765 43211" }
+                { text: "+91 70093 50717" }
             ],
             highlight: true
         },
@@ -129,7 +128,7 @@ const ContactPage = () => {
     const locations = [
         {
             title: "VIP Kitchen & Interiors",
-            address: "Chandigarh Road, near Petrol Pump, Garhshankar, Punjab 144527",
+            address: "Nawanshahr Road, near Petrol Pump, Garhshankar, Punjab 144527",
             mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3412.2991205617764!2d76.14400427550429!3d31.2124412743563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391abfca5f3876a3%3A0xc171f4da1a002ab9!2sVIP%20Kitchen%20%26%20Interiors!5e0!3m2!1sen!2sin!4v1737289576156!5m2!1sen!2sin"
         },
         {

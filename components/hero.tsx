@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,28 +12,33 @@ interface Headline {
     subtitle: string;
 }
 
+interface Step {
+    title: string;
+    notes: string[];
+}
+
 const images: string[] = [
-    "/hero-img-1.jpg",
-    "/hero-img-2.jpg",
+    "/remote-door-closing.jpg",
+    "/_55b488cf-39c3-4149-806a-4a3bd392887e.jpg",
     "/yivWL.jpg",
 ];
 
 const headlines: Headline[] = [
     {
-        title: "Transform Your Living Space",
-        subtitle: "Experience luxury and thoughtful design that reflects your personality, starting at Rs.1800/sqft."
+        title: "Automatic Door & Curtains",
+        subtitle: "Our home automation services bring convenience, security, and efficiency to your living space by integrating smart technology into your home. With seamless control over lighting, security, doors   you can enjoy a connected lifestyle tailored to your needs."
     },
     {
-        title: "Elevate Your Home's Style",
-        subtitle: "Discover modern kitchens, serene bedrooms, and luxury interiors that empower your lifestyle and celebrate you."
+        title: "2D-3D Interior Design Available with Consultation",
+        subtitle: "Design your dream home with precision, aesthetics, and positive energy! Our expert 2D & 3D interior design services include Vastu guidance to create a harmonious and balanced living space."
     },
     {
-        title: "Make Your Dream Home a Reality",
-        subtitle: "Let our professional designers guide you in creating a beautiful, practical, and unique reflection of your personality."
+        title: "Interior Vastu Consultation",
+        subtitle: "Enhance the energy and positivity of your home with our VastuShastra design services. Our experts integrate traditional Vastu principles with modern architecture to create spaces that promote health, happiness, and prosperity."
     }
 ];
 
-const steps = [
+const steps: Step[] = [
     {
         title: "Discover",
         notes: [
@@ -60,63 +65,56 @@ const steps = [
     }
 ];
 
-const TRANSITION_DURATION = 3000;
-const FADE_DURATION = 100;
+const TRANSITION_DURATION = 5000;
+const FADE_DURATION = 300;
 
-const CustomProgressBar: React.FC<{
+interface CustomProgressBarProps {
     isActive: boolean;
     isComplete: boolean;
     duration: number;
     onComplete?: () => void;
-}> = ({ isActive, isComplete, duration, onComplete }) => {
-    const [width, setWidth] = useState<number>(0);
+}
+
+const CustomProgressBar: React.FC<CustomProgressBarProps> = ({ isActive, isComplete, duration, onComplete }) => {
+    const [width, setWidth] = useState(0);
 
     useEffect(() => {
-        let startTime: number | null = null;
-        let animationFrame: number;
-
-        const animate = (timestamp: number) => {
-            if (!startTime) startTime = timestamp;
-            const progress = timestamp - startTime;
-
-            if (isActive) {
-                const newWidth = Math.min((progress / duration) * 100, 100);
-                setWidth(newWidth);
-
-                if (progress < duration) {
-                    animationFrame = requestAnimationFrame(animate);
-                } else if (onComplete) {
-                    onComplete();
-                }
-            }
-        };
-
         if (isActive) {
-            startTime = null;
             setWidth(0);
-            animationFrame = requestAnimationFrame(animate);
+            const startTime = Date.now();
+            
+            const timer = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const progress = (elapsed / duration) * 100;
+                
+                if (progress >= 100) {
+                    setWidth(100);
+                    clearInterval(timer);
+                    if (onComplete) onComplete();
+                } else {
+                    setWidth(progress);
+                }
+            }, 16);
+
+            return () => clearInterval(timer);
         } else {
             setWidth(isComplete ? 100 : 0);
         }
-
-        return () => {
-            if (animationFrame) {
-                cancelAnimationFrame(animationFrame);
-            }
-        };
     }, [isActive, isComplete, duration, onComplete]);
 
     return (
         <div className="relative w-full h-1 bg-white/10">
-            <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-teal-500 to-teal-400 transition-all duration-300"
-                style={{ width: `${width}%` }}>
+            <div 
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-teal-500 to-teal-400 transition-all duration-300"
+                style={{ width: `${width}%` }}
+            >
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-teal-400 rotate-45" />
             </div>
         </div>
     );
 };
 
-const StepCard: React.FC<{
+interface StepCardProps {
     index: number;
     title: string;
     note: string;
@@ -124,7 +122,17 @@ const StepCard: React.FC<{
     isComplete: boolean;
     duration: number;
     onComplete?: () => void;
-}> = ({ index, title, note, isActive, isComplete, duration, onComplete }) => (
+}
+
+const StepCard: React.FC<StepCardProps> = ({ 
+    index, 
+    title, 
+    note, 
+    isActive, 
+    isComplete, 
+    duration, 
+    onComplete 
+}) => (
     <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:border-teal-500/30 transition-all duration-300 overflow-hidden group">
         <div className="p-4">
             <div className="flex items-center space-x-3 mb-3">
@@ -149,28 +157,74 @@ const StepCard: React.FC<{
     </Card>
 );
 
-const HeroSection: React.FC = () => {
-    const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+interface NavigationButtonProps {
+    direction: 'prev' | 'next';
+    onClick: () => void;
+}
 
-    const moveToNextImage = useCallback(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, []);
+const NavigationButton: React.FC<NavigationButtonProps> = ({ direction, onClick }) => {
+    const Icon = direction === 'prev' ? ChevronLeftCircle : ChevronRightCircle;
+    return (
+        <button
+            onClick={(e) => {
+                e.preventDefault();
+                onClick();
+            }}
+            className={cn(
+                "absolute top-1/2 -translate-y-1/2 p-2 z-20",
+                "text-white/70 hover:text-white bg-black/20 hover:bg-black/40 rounded-full",
+                "transition-all duration-300 hover:scale-110 focus:outline-none",
+                direction === 'prev' ? "left-4 md:left-8" : "right-4 md:right-8"
+            )}
+            aria-label={direction === 'prev' ? 'Previous slide' : 'Next slide'}
+        >
+            <Icon className="w-8 h-8 md:w-10 md:h-10" />
+        </button>
+    );
+};
+
+const HeroSection: React.FC = () => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+
+    const handleNavigation = useCallback((newIndex: number) => {
+        if (isTransitioning) return;
+        
+        setIsTransitioning(true);
+        setAutoplayEnabled(false);
+        setCurrentImageIndex(newIndex);
+        
+        setTimeout(() => {
+            setIsTransitioning(false);
+            setAutoplayEnabled(true);
+        }, FADE_DURATION);
+    }, [isTransitioning]);
+
+    const goToNext = useCallback(() => {
+        const nextIndex = (currentImageIndex + 1) % images.length;
+        handleNavigation(nextIndex);
+    }, [currentImageIndex, handleNavigation]);
+
+    const goToPrev = useCallback(() => {
+        const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
+        handleNavigation(prevIndex);
+    }, [currentImageIndex, handleNavigation]);
+
+    const goToSlide = useCallback((index: number) => {
+        if (index === currentImageIndex) return;
+        handleNavigation(index);
+    }, [currentImageIndex, handleNavigation]);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeout(() => {
-                moveToNextImage();
-            }, FADE_DURATION);
-        }, TRANSITION_DURATION);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, [moveToNextImage]);
+        if (!autoplayEnabled) return;
+        
+        const timer = setInterval(goToNext, TRANSITION_DURATION);
+        return () => clearInterval(timer);
+    }, [autoplayEnabled, goToNext]);
 
     return (
         <div className="relative w-full min-h-screen overflow-hidden z-10">
-            {/* Image Container */}
             {images.map((src, index) => (
                 <div
                     key={index}
@@ -184,26 +238,39 @@ const HeroSection: React.FC = () => {
                         alt={`Hero image ${index + 1}`}
                         fill
                         priority={index === 0}
-                        className="object-cover w-full h-full"
-                        sizes="100vw"
+                        className="object-cover"
                         quality={90}
                     />
-                    {/* Enhanced gradient overlay with stronger mobile visibility */}
                     <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80 md:from-black/70 md:via-black/50 md:to-black/70" />
                 </div>
             ))}
 
-            {/* Content Container */}
+            <NavigationButton direction="prev" onClick={goToPrev} />
+            <NavigationButton direction="next" onClick={goToNext} />
+
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+                {images.map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className={cn(
+                            "w-2 h-2 rounded-full transition-all duration-300",
+                            currentImageIndex === index 
+                                ? "bg-teal-400 w-8" 
+                                : "bg-white/50 hover:bg-white/70"
+                        )}
+                        aria-label={`Go to slide ${index + 1}`}
+                    />
+                ))}
+            </div>
+
             <div className="absolute inset-0 flex flex-col">
-                {/* Main Content */}
                 <div className="flex-1 flex flex-col justify-center items-center px-4 md:px-6 container mx-auto">
                     <div className="max-w-xl md:max-w-2xl relative text-center">
                         <div className="w-16 md:w-20 h-1 bg-gradient-to-r from-teal-500 to-teal-400 mb-6 md:mb-8 mx-auto" />
-                        {/* Responsive typography */}
-                        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 animate-fade-in drop-shadow-lg leading-tight">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 animate-fade-in drop-shadow-lg leading-tight">
                             {headlines[currentImageIndex].title}
                         </h1>
-                        {/* Enhanced mobile subtitle */}
                         <div className="backdrop-blur-sm bg-black/40 md:bg-black/30 rounded-lg p-3 md:p-4 mb-6 md:mb-8">
                             <p className="text-lg md:text-xl text-white/90 animate-fade-in-delay leading-relaxed">
                                 {headlines[currentImageIndex].subtitle}
@@ -216,7 +283,6 @@ const HeroSection: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Steps Cards - Hidden on mobile */}
                 <div className="hidden md:block container mx-auto px-6 pb-16">
                     <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
                         {steps.map((step, index) => (
@@ -228,7 +294,7 @@ const HeroSection: React.FC = () => {
                                 isActive={currentImageIndex === index}
                                 isComplete={currentImageIndex > index}
                                 duration={TRANSITION_DURATION}
-                                onComplete={index === 2 ? moveToNextImage : undefined}
+                                onComplete={index === 2 ? goToNext : undefined}
                             />
                         ))}
                     </div>
