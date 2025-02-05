@@ -1,18 +1,18 @@
-// layout.tsx
-
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import NextTopLoader from "nextjs-toploader";
 import Footer from "@/components/footer";
-import Image from "next/image"; // Import Image component
+import Image from "next/image";
+import { Phone } from "lucide-react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -40,9 +40,10 @@ export default function RootLayout({
         <NextTopLoader color="#14b8a6" showSpinner={false} />
         {children}
         <Footer />
-
-        {/* Floating WhatsApp Button */}
-        <div className="fixed bottom-4 right-4 z-50">
+        
+        {/* Floating Action Buttons Container */}
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-4">
+          {/* WhatsApp Button */}
           <a
             href="https://wa.me/7009350717"
             target="_blank"
@@ -51,12 +52,21 @@ export default function RootLayout({
             aria-label="Chat on WhatsApp"
           >
             <Image
-              src="/whatsapp_logo.jpg" // Ensure this image is inside the "public" folder
+              src="/whatsapp_logo.jpg"
               alt="WhatsApp"
-              width={56} // Matches w-14 (14 * 4 = 56px)
+              width={56}
               height={56}
               className="rounded-full shadow-lg hover:scale-110 transition-transform"
             />
+          </a>
+          
+          {/* Call Button */}
+          <a
+            href="tel:+917009350717"
+            className="flex items-center justify-center w-14 h-14 rounded-full bg-teal-500 shadow-lg hover:scale-110 transition-transform"
+            aria-label="Call Us"
+          >
+            <Phone className="w-7 h-7 text-white" />
           </a>
         </div>
       </body>
