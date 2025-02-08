@@ -45,7 +45,8 @@ const GalleryPage: React.FC = () => {
         { id: 'living', label: 'Living Room' },
         { id: 'kitchen', label: 'Kitchen' },
         { id: 'bedroom', label: 'Bedroom' },
-        { id: 'bathroom', label: 'Bathroom' }
+        { id: 'bathroom', label: 'Bathroom' },
+        { id: 'homeAutomation', label: 'Home Automation' }
     ];
 
     const galleryItems: GalleryItem[] = [
@@ -202,6 +203,98 @@ const GalleryPage: React.FC = () => {
             category: 'bathroom',
             title: 'Master Bathroom',
             description: 'Double vanity with freestanding soaking tub'
+        },
+
+        {
+            id: 31,
+            image: "/gallery-1.jpg",
+            category: 'homeAutomation',
+            title: 'Smart Control Hub',
+            description: 'Centralized dashboard for managing all your smart home devices seamlessly.'
+        },
+        {
+            id: 32,
+            image: "/homeAutog1.jpg",
+            category: 'homeAutomation',
+            title: 'Automated Lighting',
+            description: 'Experience perfectly timed ambiance with our intelligent, energy-efficient lighting system.'
+        },
+        {
+            id: 33,
+            image: "/smartcurtains.jpg",
+            category: 'homeAutomation',
+            title: 'Smart Curtains',
+            description: 'Automated window treatments that adjust to natural light and temperature for ultimate comfort.'
+        },
+        {
+            id: 34,
+            image: "/gallery-4.jpg",
+            category: 'homeAutomation',
+            title: 'Intelligent Security',
+            description: 'Advanced security systems with real-time monitoring and remote access for peace of mind.'
+        },
+        {
+            id: 35,
+            image: "/dbl-lock.jpg",
+            category: 'homeAutomation',
+            title: 'Smart Door Locks',
+            description: 'Secure your home with state-of-the-art biometric and digital locking systems.'
+        },
+        {
+            id: 36,
+            image: "/swicthes.jpg",
+            category: 'homeAutomation',
+            title: 'Connected Switches',
+            description: 'Effortlessly control your home’s lighting and appliances with smart, networked switches.'
+        },
+        {
+            id: 37,
+            image: "/leccyGenesis.jpg",
+            category: 'homeAutomation',
+            title: 'Energy Management',
+            description: 'Optimize energy usage with intelligent automation and real-time consumption analytics.'
+        },
+        {
+            id: 38,
+            image: "/keyFeatures.jpg",
+            category: 'homeAutomation',
+            title: 'Smart Thermostat',
+            description: 'Maintain the perfect indoor climate with automated temperature control and energy saving modes.'
+        },
+        {
+            id: 39,
+            image: "/chor.jpg",
+            category: 'homeAutomation',
+            title: 'Voice-Control Integration',
+            description: 'Manage your home systems hands-free using advanced voice command technology.'
+        },
+        {
+            id: 40,
+            image: "/securityLocks.jpg",
+            category: 'homeAutomation',
+            title: 'Advanced Surveillance',
+            description: 'Monitor your property with smart cameras and integrated alarm systems for enhanced security.'
+        },
+        {
+            id: 41,
+            image: "/lowBatteryAlarm.jpg",
+            category: 'homeAutomation',
+            title: 'Low Battery Alert System',
+            description: 'Receive timely notifications when your smart devices are running low on battery, ensuring uninterrupted performance.'
+        },
+        {
+            id: 42,
+            image: "/TouchScreenSensors.jpg",
+            category: 'homeAutomation',
+            title: 'Interactive Touch Panel',
+            description: 'Easily manage your home’s automation features with our responsive touch screen controls for seamless interaction.'
+        },
+        {
+            id: 43,
+            image: "/fourWaysToUnlock.jpg",
+            category: 'homeAutomation',
+            title: 'Multi-Access Entry',
+            description: 'Unlock your home in four versatile ways, offering the perfect blend of convenience and security.'
         }
     ];
 
