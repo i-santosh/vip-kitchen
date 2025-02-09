@@ -62,7 +62,7 @@ const TeamMemberCard = ({ image, name, role, description }: TeamMemberCardProps)
 
 const AboutUs: React.FC = () => {
   const stats = [
-    { icon: Building2, value: "15+", label: "Years Experience" },
+    { icon: Building2, value: "17+", label: "Years Experience" },
     { icon: Users, value: "2000+", label: "Happy Clients" },
     { icon: CheckCircle2, value: "5000+", label: "Projects Completed" },
     { icon: Star, value: "4.9", label: "Average Rating" }
@@ -134,7 +134,7 @@ const AboutUs: React.FC = () => {
                 className="object-cover rounded-xl"
               />
               <div className="absolute -bottom-8 -right-8 bg-white p-6 rounded-xl shadow-xl">
-                <p className="text-4xl font-bold text-teal-600">15+</p>
+                <p className="text-4xl font-bold text-teal-600">17+</p>
                 <p className="text-gray-600">Years of Excellence</p>
               </div>
             </div>

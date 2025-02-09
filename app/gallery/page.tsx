@@ -216,8 +216,8 @@ const GalleryPage: React.FC = () => {
             id: 32,
             image: "/homeAutog1.jpg",
             category: 'homeAutomation',
-            title: 'Automated Lighting',
-            description: 'Experience perfectly timed ambiance with our intelligent, energy-efficient lighting system.'
+            title: 'Automated Locks',
+            description: 'Experience perfectly timed ambiance with our intelligent, secure lock system.'
         },
         {
             id: 33,
@@ -244,8 +244,8 @@ const GalleryPage: React.FC = () => {
             id: 36,
             image: "/swicthes.jpg",
             category: 'homeAutomation',
-            title: 'Connected Switches',
-            description: 'Effortlessly control your home’s lighting and appliances with smart, networked switches.'
+            title: 'Camera Doorbell',
+            description: 'Effortlessly control your home’s security  with smart, networked camera doorbell.'
         },
         {
             id: 37,
@@ -265,15 +265,15 @@ const GalleryPage: React.FC = () => {
             id: 39,
             image: "/chor.jpg",
             category: 'homeAutomation',
-            title: 'Voice-Control Integration',
-            description: 'Manage your home systems hands-free using advanced voice command technology.'
+            title: 'Anti-theft Alarm Locks',
+            description: 'Manage your home security using advanced Anti-theft Alarm Locks Technology.'
         },
         {
             id: 40,
             image: "/securityLocks.jpg",
             category: 'homeAutomation',
             title: 'Advanced Surveillance',
-            description: 'Monitor your property with smart cameras and integrated alarm systems for enhanced security.'
+            description: 'Monitor your property with advanced system and password for enhanced security.'
         },
         {
             id: 41,
@@ -295,6 +295,13 @@ const GalleryPage: React.FC = () => {
             category: 'homeAutomation',
             title: 'Multi-Access Entry',
             description: 'Unlock your home in four versatile ways, offering the perfect blend of convenience and security.'
+        },
+        {
+            id: 44,
+            image: "/6in1lock.jpg",
+            category: 'homeAutomation',
+            title: '6 in 1 Smart Door Lock',
+            description: 'Experience ultimate security and convenience with multiple unlocking methods, including fingerprint, passcode, RFID card, mobile app, mechanical key, and remote access.'
         }
     ];
 

@@ -111,9 +111,6 @@ const ContactPage = () => {
                 { text: "Nawanshahr Road, Near Petrol Pump" },
                 { text: "Garhshankar-Punjab, India, 144527" },
                 { text: "" },
-                { text: "Branch Office", isTitle: true },
-                { text: "Model Town, Up Stairs Adidas Showroom" },
-                { text: "City Center, Ropar, Punjab, India, 140001" }
             ]
         },
         {
@@ -130,15 +127,8 @@ const ContactPage = () => {
             title: "VIP Kitchen & Interiors",
             address: "Nawanshahr Road, near Petrol Pump, Garhshankar, Punjab 144527",
             mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3412.2991205617764!2d76.14400427550429!3d31.2124412743563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391abfca5f3876a3%3A0xc171f4da1a002ab9!2sVIP%20Kitchen%20%26%20Interiors!5e0!3m2!1sen!2sin!4v1737289576156!5m2!1sen!2sin"
-        },
-        {
-            title: "VIP Kitchen & Interiors",
-            address: "Model Town, Up Stairs Adidas Showroom, VIP Kitchen, City Center, Punjab 140001",
-            mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3421.6189194132744!2d76.5193369754938!3d30.953206074478643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39055516b41791c9%3A0xa4623ad21d2257d!2sVIP%20Kitchen%20%26%20Interiors!5e0!3m2!1sen!2sin!4v1737289659929!5m2!1sen!2sin"
         }
     ];
-
-
 
 
     return (
@@ -317,7 +307,7 @@ const ContactPage = () => {
             {/* Map Section */}
             <section className="py-16 bg-stone-50">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
                         {locations.map((location, index) => (
                             <Card key={index} className="border-none overflow-hidden">
                                 <CardContent className="p-0">
