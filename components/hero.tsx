@@ -23,7 +23,7 @@ const images: string[] = [
     "/hero-img-2.jpg",
     "/hero-img-1.jpg",
     "/gallery-1.jpg",
-    "/2d-3d.jpg",
+    "/i-2D-3D.jpg",
     "/remote-door-closing.jpg",
 ];
 
