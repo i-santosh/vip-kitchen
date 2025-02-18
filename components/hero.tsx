@@ -20,7 +20,7 @@ const FADE_DURATION = 300;
 const INDICATOR_HIDE_DELAY = 1000;
 
 const images: string[] = [
-    "/hero-img-2.jpg",
+    "/interior-hero.jpg",
     "/hero-img-1.jpg",
     "/gallery-1.jpg",
     "/i-2D-3D.jpg",
@@ -31,16 +31,17 @@ const headlines: Headline[] = [
     {
         title: "Modular Kitchens",
         subtitles: [
-            "2D & 3D Interior Designing",
             "Kicthen Manufacturing & Installation (Lifetime Warranty)",
+            "2D & 3D Interior Designing",
             {
                 text: "Including Other Works In Kitchen:",
                 nestedItems: [
-                    "Granite Tiles",
+                    "Granite Tiles (Installation)",
                     "Sink",
-                    "Hove & Chimney",
-                    "Undersink Filter",
-                    "Lightings"
+                    "Hob & Chimney (Installation)",
+                    "Undersink Filter (Installation)",
+                    "Lightings",
+                    "Breakfast Counter"
                 ]
             }
         ]
@@ -48,9 +49,10 @@ const headlines: Headline[] = [
     {
         title: "Interior Designing",
         subtitles: [
-            "Custom Windows, LED Units, Bedrooms",
             "Room Interior Design with 2D & 3D Planning",
             "Interior Vastu According To Direction & Requirements",
+            "Window & Door (Manufacturing + Installation)",
+            "LED Units, Washroom Vanity, Almirah",
             "Renovation (Old To Modern Home With Vastu)"
         ]
     },
@@ -61,11 +63,11 @@ const headlines: Headline[] = [
             "Authorized Distributor of Leccy & Genesis USA Products",
             "Full Control of Appliances from Anywhere in the World",
             "Smart & Secure Home Automation",
-            "Control And Manage Lights, Fans Switches, Curtains, Washing Machines & More Remotely",
+            "Control And Manage Lights, Fans Switches, Curtains, AC, Geyser",
         ]
     },
     {
-        title: "2D & 3D Design",
+        title: "2D & 3D Design Planning, Budget",
         subtitles: [
             "Planning Budget, 2D & 3D Design",
             "2D & 3D Drawing Before Booking",
@@ -77,13 +79,13 @@ const headlines: Headline[] = [
         title: "Guarantee & Warranty After Service",
         subtitles: [
             "Termite (ਸਿਉਂਕ) & Borer Proof (Lifetime Warranty)",
-            "5 Year Warranty on Products",
+            "5 Year Warranty on Accessories",
             {
                 text: "Having Dealership Of:",
                 nestedItems: [
-                    "APCO (Kitchen Accessories)",
-                    "ELICA (Hove & Chimney)",
-                    "LECCY & GENESIS (Door Lock & Switches)",
+                    "EBCO (Kitchen Accessories)",
+                    "ELICA (Hob & Chimney)",
+                    "LECCY & GENESIS (Smart Door Lock & Switches)",
                 ]
             }
         ]
@@ -276,7 +278,7 @@ const HeroSection: React.FC = () => {
                                             <li key={index} className="mb-2">
                                                 <b>{subtitle.text}</b>
                                                 {subtitle.nestedItems && subtitle.nestedItems.length > 0 && (
-                                                    <ul className="list-disc ml-4 mt-1">
+                                                    <ul className="list-disc ml-8 mt-1">
                                                         {subtitle.nestedItems.map((item, subIndex) => (
                                                             <li key={subIndex}>
                                                                 <small className="text-lg">{item}</small>

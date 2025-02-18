@@ -77,6 +77,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description }) 
 
 const offerCards = [
   {
+    title: 'Modular Kitchens',
+    description: 'Expert designers to help you create your dream space with personalized solutions.',
+    imageUrl: '/6-1.jpg'
+  },
+  {
     title: 'Interior Design',
     description: 'Expert designers to help you create your dream space with personalized solutions.',
     imageUrl: '/6-1.jpg'
@@ -106,7 +111,7 @@ const projectGallery = [
   },
   {
     image: "/0025-1734075898-kVHBp.jpg",
-    title: "Luxury Kitchen",
+    title: "Designer Kitchen",
     description: "State-of-the-art kitchen design with premium finishes"
   },
   {
@@ -171,7 +176,7 @@ const Home = () => {
               The complete home interiors experience
             </h2>
             <p className="text-gray-600">
-              No more dreaming about your interiors. <strong>VIP Kitchen</strong> brings
+              No more dreaming about your interiors. <strong>VIP Kitchen and Interiors</strong> brings
               together award-winning designers, service partners and brands, to help
               you take your home interiors from dream to reality.
             </p>
@@ -188,7 +193,7 @@ const Home = () => {
               What we offer
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {offerCards.map((card, index) => (
               <OfferCard key={index} {...card} />
             ))}
@@ -202,7 +207,7 @@ const Home = () => {
           <div className="flex flex-col items-center mb-12">
             <div className="w-12 h-1 bg-teal-500 mb-4" />
             <h4 className="text-3xl font-bold text-center max-w-2xl">
-              We believe home design should be empowering, dynamic, and fun.
+              Home Interior & Kitchen Design
             </h4>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

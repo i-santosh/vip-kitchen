@@ -334,7 +334,7 @@ const GalleryPage: React.FC = () => {
     };
 
     const filteredItems = selectedCategory === 'all'
-        ? galleryItems
+        ? galleryItems.filter(item => item.category !== 'homeAutomation')
         : galleryItems.filter(item => item.category === selectedCategory);
 
     return (
