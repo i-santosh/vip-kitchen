@@ -78,8 +78,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description }) 
 const offerCards = [
   {
     title: 'Modular Kitchens',
-    description: 'Expert designers to help you create your dream space with personalized solutions.',
-    imageUrl: '/6-1.jpg'
+    description: 'Kicthen Manufacturing & Installation (Lifetime Warranty)',
+    imageUrl: '/0025-1734075898-kVHBp.jpg'
   },
   {
     title: 'Interior Design',

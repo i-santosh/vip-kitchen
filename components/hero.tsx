@@ -51,7 +51,7 @@ const headlines: Headline[] = [
         subtitles: [
             "Room Interior Design with 2D & 3D Planning",
             "Interior Vastu According To Direction & Requirements",
-            "Window & Door (Manufacturing + Installation)",
+            "Window & Doors (Manufacturing & Installation)",
             "LED Units, Washroom Vanity, Almirah",
             "Renovation (Old To Modern Home With Vastu)"
         ]
@@ -63,13 +63,13 @@ const headlines: Headline[] = [
             "Authorized Distributor of Leccy & Genesis USA Products",
             "Full Control of Appliances from Anywhere in the World",
             "Smart & Secure Home Automation",
-            "Control And Manage Lights, Fans Switches, Curtains, AC, Geyser",
+            "Control And Manage Lights, Fans Switches, Curtains, AC, Geyser, Washing Machines & More Remotely",
         ]
     },
     {
-        title: "2D & 3D Design Planning, Budget",
+        title: "2D & 3D Design",
         subtitles: [
-            "Planning Budget, 2D & 3D Design",
+            "2D & 3D Design Planning, Budget",
             "2D & 3D Drawing Before Booking",
             "Budget According to Drawings",
             "Customisation According to Space & Requirements"
